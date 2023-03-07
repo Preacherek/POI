@@ -3,6 +3,7 @@
 import random
 import math
 import matplotlib.pyplot as plt
+from csv import writer
 
 
 # Points class
@@ -47,9 +48,10 @@ def surface_ver(min_value_x, max_value_x, min_value_z, max_value_z, y_value, poi
 
 
 def make_circle(radius, x_center, y_center):
-    r = math.sqrt(random.uniform((radius-1)**2, radius**2))
+    r = math.sqrt(random.uniform((radius - 1) ** 2, radius ** 2))
     theta = random.uniform(-math.pi, math.pi)
     return x_center + r * math.cos(theta), y_center + r * math.sin(theta)
+
 
 def surface_cyl(min_value_x, min_value_y, radius, min_value_z, max_value_z, points):
     i = 0
@@ -77,8 +79,8 @@ if __name__ == '__main__':
     ax.scatter3D(x_data_c, y_data_c, z_data_c)
     plt.show()
 
-    # xyz_file = open("zad2.xyz", 'w')
-    # for i in range(1000):
-    #   xyz_file.write("{}\t {}\t {}\t\n".format(x_data_c, y_data_c, z_data_c))
-
-    print("Hello")
+    points = zip(x_data_c, y_data_c, z_data_c)
+    with open('zad1.xyz', 'w', encoding='utf-8', newline='\n') as csvfile:
+        csvwriter = writer(csvfile)
+        for p in points:
+            csvwriter.writerow(p)
