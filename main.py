@@ -25,6 +25,7 @@ class Surface:
         self.corner_4 = p4
 
 
+# Function for generate horizontal wall
 def surface_hor(min_value_x, max_value_x, min_value_y, max_value_y, z_value, points):
     i = 0
     x_table, y_table, z_table = [], [], []
@@ -36,6 +37,7 @@ def surface_hor(min_value_x, max_value_x, min_value_y, max_value_y, z_value, poi
     return x_table, y_table, z_table
 
 
+# Function for generate vertical wall
 def surface_ver(min_value_x, max_value_x, min_value_z, max_value_z, y_value, points):
     i = 0
     x_table, y_table, z_table = [], [], []
@@ -47,12 +49,14 @@ def surface_ver(min_value_x, max_value_x, min_value_z, max_value_z, y_value, poi
     return x_table, y_table, z_table
 
 
+# Function for generate circle with hole
 def make_circle(radius, x_center, y_center):
     r = math.sqrt(random.uniform((radius - 1) ** 2, radius ** 2))
     theta = random.uniform(-math.pi, math.pi)
     return x_center + r * math.cos(theta), y_center + r * math.sin(theta)
 
 
+# Function for generate cylinder
 def surface_cyl(min_value_x, min_value_y, radius, min_value_z, max_value_z, points):
     i = 0
     x_table, y_table, z_table = [], [], []
@@ -69,7 +73,7 @@ def surface_cyl(min_value_x, min_value_y, radius, min_value_z, max_value_z, poin
 if __name__ == '__main__':
     x_data_a, y_data_a, z_data_a = surface_hor(0, 50, 20, 30, 25, 500)
     x_data_b, y_data_b, z_data_b = surface_ver(0, 50, 0, 80, 50, 500)
-    x_data_c, y_data_c, z_data_c = surface_cyl(0, 0, 10, 0, 100, 1000)
+    x_data_c, y_data_c, z_data_c = surface_cyl(0, 0, 10, 0, 100, 100000)
 
     # Initialization figure
     fig = plt.figure()
@@ -79,6 +83,7 @@ if __name__ == '__main__':
     ax.scatter3D(x_data_c, y_data_c, z_data_c)
     plt.show()
 
+    # Save data to .xyz file
     points = zip(x_data_c, y_data_c, z_data_c)
     with open('zad1.xyz', 'w', encoding='utf-8', newline='\n') as csvfile:
         csvwriter = writer(csvfile)
