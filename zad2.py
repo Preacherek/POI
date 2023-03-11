@@ -2,6 +2,7 @@
 # import library
 import csv
 import matplotlib.pyplot as plt
+from sklearn.linear_model import RANSACRegressor
 
 # Function for read files
 def read_file(file_name):
@@ -29,8 +30,12 @@ if __name__ == '__main__':
         data_z.append(data[i][2])
         i = i + 1
 
+    # Initialization RANSAC
+    ransac = RANSACRegressor()
+
     # Initialization figure
     fig = plt.figure()
-    ax = plt.axes(projection='3d')
-    ax.scatter3D(data_x, data_y, data_z)
+    # ax = plt.axes(projection='3d')
+    # ax.scatter3D(data_x, data_y, data_z)
+    plt.scatter(data_x, data_y, color='red')
     plt.show()
